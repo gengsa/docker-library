@@ -4,6 +4,8 @@ ENV PHALCON_VERSION=3.4.0
 
 ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
 
+ENV YAML_DEPS yaml-dev
+
 # set -x can Print commands and their arguments as they are executed.
 RUN set -x \
     # update mirror
@@ -14,10 +16,18 @@ RUN set -x \
     # include: autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c, and it's deps
     && apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
     \
+    # install php pdo_mysql extension
+    && docker-php-ext-install pdo_mysql \
+    \
     # install php memcached extension
     && apk add --no-cache --update --virtual .memcached-deps $MEMCACHED_DEPS \
     && pecl install memcached \
     && docker-php-ext-enable memcached \
+    \
+    # install php yaml extension
+    && apk add --no-cache --update --virtual .yaml-deps $YAML_DEPS \
+    && pecl install yaml \
+    && docker-php-ext-enable yaml \
     \
     # install php phalcon extension
     && curl -sSL "https://codeload.github.com/phalcon/cphalcon/tar.gz/v${PHALCON_VERSION}" | tar -xz \
