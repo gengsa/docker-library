@@ -29,6 +29,10 @@ RUN set -x \
     && pecl install yaml \
     && docker-php-ext-enable yaml \
     \
+    # install php xdebug extension
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    \
     # install php phalcon extension
     && curl -sSL "https://codeload.github.com/phalcon/cphalcon/tar.gz/v${PHALCON_VERSION}" | tar -xz \
     && cd cphalcon-${PHALCON_VERSION}/build \
@@ -36,6 +40,10 @@ RUN set -x \
     && cp ../tests/_ci/phalcon.ini $(php-config --configure-options | grep -o "with-config-file-scan-dir=\([^ ]*\)" | awk -F'=' '{print $2}') \
     && cd ../../ \
     && rm -r cphalcon-${PHALCON_VERSION} \
+    \
+    # install composer
+    && curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
     \
     # remove build deps, tmps
     && apk del .phpize-deps \
