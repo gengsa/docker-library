@@ -6,6 +6,8 @@ ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
 
 ENV YAML_DEPS yaml-dev
 
+ENV GD_DEPS libpng-dev
+
 # set -x can Print commands and their arguments as they are executed.
 RUN set -x \
     # update mirror
@@ -15,9 +17,13 @@ RUN set -x \
     # $PHPIZE_DEPS from parent image
     # include: autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c, and it's deps
     && apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
+    && apk add --no-cache --update --virtual .gd-deps $GD_DEPS \
     \
     # install php pdo_mysql extension
-    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install \
+      gd \
+      pdo_mysql \
+      zip \
     \
     # install php memcached extension
     && apk add --no-cache --update --virtual .memcached-deps $MEMCACHED_DEPS \
