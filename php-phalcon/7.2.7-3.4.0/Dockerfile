@@ -6,7 +6,7 @@ ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
 
 ENV YAML_DEPS yaml-dev
 
-ENV GD_DEPS libpng-dev
+ENV GD_DEPS libpng-dev freetype freetype-dev
 
 # set -x can Print commands and their arguments as they are executed.
 RUN set -x \
@@ -18,6 +18,8 @@ RUN set -x \
     # include: autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c, and it's deps
     && apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS \
     && apk add --no-cache --update --virtual .gd-deps $GD_DEPS \
+    \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include \
     \
     # install php pdo_mysql extension
     && docker-php-ext-install \
@@ -50,6 +52,7 @@ RUN set -x \
     # install composer
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
+    && composer config -g repo.packagist composer https://packagist.phpcomposer.com \
     \
     # remove build deps, tmps
     && apk del .phpize-deps \
