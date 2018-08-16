@@ -6,7 +6,7 @@ ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
 
 ENV YAML_DEPS yaml-dev
 
-ENV GD_DEPS libpng-dev freetype freetype-dev
+ENV GD_DEPS freetype freetype-dev libpng libpng-dev libjpeg-turbo libjpeg-turbo-dev
 
 # set -x can Print commands and their arguments as they are executed.
 RUN set -x \
@@ -20,7 +20,8 @@ RUN set -x \
     && apk add --no-cache --update --virtual .gd-deps $GD_DEPS \
     \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include \
-    \
+      --with-jpeg-dir=/usr/include \
+      --with-png-dir=/usr/include \
     # install php pdo_mysql extension
     && docker-php-ext-install \
       gd \

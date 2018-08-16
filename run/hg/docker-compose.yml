@@ -26,6 +26,7 @@ services:
     image: gengsa/php-phalcon:7.2.7-3.4.0
     volumes:
       - /Users/gengsa/workspace/HG:/var/www/html
+      - ./data/php:/usr/local/etc
 
 # networks:
 #   webnet:
