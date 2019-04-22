@@ -23,7 +23,7 @@ services:
   php:
     # replace username/repo:tag with your name and image details
     # image: username/repo:tag
-    image: php-phalcon:5.6.36-2.0.13
+    image: gengsa/php-phalcon:5.6.36-2.0.13
     volumes:
       - /Users/gengsa/workspace/HG-old:/var/www/html
       - ./data/php:/usr/local/etc
