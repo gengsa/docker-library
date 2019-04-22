@@ -11,11 +11,11 @@ services:
       # restart_policy:
       #   condition: on-failure
     ports:
-      - "8083:80"
+      - "8085:80"
       # maybe need export some port for 443
     volumes:
-      - /Users/gengsa/workspace/HG-old:/var/www/html
-      - ./data/nginx/hg.conf:/etc/nginx/conf.d/default.conf
+      - /Users/gengsa/workspace/gaia:/var/www/html
+      - ./data/nginx/hg_uk.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
     # networks: # ? to remove networks?
@@ -23,9 +23,9 @@ services:
   php:
     # replace username/repo:tag with your name and image details
     # image: username/repo:tag
-    image: gengsa/php-phalcon:5.6.36-2.0.13
+    image: gengsa/php-phalcon:7.2.7-3.4.0
     volumes:
-      - /Users/gengsa/workspace/HG-old:/var/www/html
+      - /Users/gengsa/workspace/gaia:/var/www/html
       - ./data/php:/usr/local/etc
 
 # networks:
