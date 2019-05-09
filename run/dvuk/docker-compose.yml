@@ -11,11 +11,16 @@ services:
       # restart_policy:
       #   condition: on-failure
     ports:
-      - "8081:80"
+      - "8084:80"   # dvuk
+      - "8085:80"   # gaia
+      - "8086:80"   # dvuk-backend
       # maybe need export some port for 443
     volumes:
-      - /Users/gengsa/workspace/FS:/var/www/html
-      - ./data/nginx/fs.conf:/etc/nginx/conf.d/default.conf
+      - /Users/yl/Desktop/www/hg_uk:/var/www/html/hg_uk
+      - /Users/yl/Desktop/www/gaia:/var/www/html/gaia
+      - /Users/yl/Desktop/www/DV:/var/www/html/DV
+      - ./data/nginx/vhosts:/etc/nginx/conf.d/vhosts
+      - ./data/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
     # networks: # ? to remove networks?
@@ -25,8 +30,7 @@ services:
     # image: username/repo:tag
     image: gengsa/php-phalcon:7.2.7-3.4.0
     volumes:
-      - /Users/gengsa/workspace/FS:/var/www/html
+      - /Users/yl/Desktop/www:/var/www/html
       - ./data/php:/usr/local/etc
-
 # networks:
 #   webnet:
