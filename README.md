@@ -2,6 +2,15 @@
 1. 克隆 [HG项目](https://github.com/heavengifts/HG.git)
 2. 在 HG 项目根目录, 执行`cp config_base.yml config.yml`, 复制出一份 config.yml 文件, 做个性化配置  
 项目的最终配置是config_base.yml 和 config.yml 的 merge 结果, 其中 config.yml 里的内容会覆盖 config_base.yml里相同的内容.
+3. config.yml 中的域名配置需与 hg.conf 中的 server_name 相同, 例如域名是 dev.newhg.com, 则配置如下
+```
+site:                       
+     domain      : newhg
+     subdomain   : newhg.com
+     domainroot  : http://dev.newhg.com
+     langSuffix  : dev
+     protocol    : http
+ ```
 
 #### 搭建docker环境
 ```
