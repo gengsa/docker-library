@@ -15,7 +15,8 @@ services:
       # maybe need export some port for 443
     volumes:
       - /Users/gengsa/workspace/HG-old:/var/www/html
-      - ./data/nginx/hg.conf:/etc/nginx/conf.d/default.conf
+      - ./data/nginx/vhosts:/etc/nginx/conf.d/vhosts
+      - ./data/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
     # networks: # ? to remove networks?
