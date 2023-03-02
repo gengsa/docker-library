@@ -1,4 +1,5 @@
 #### 准备工作
+test
 1. 克隆 [HG项目](https://github.com/heavengifts/HG.git)
 2. 进入 HG 项目根目录,
 3. 执行`cp config_base.yml config.yml`, 复制出一份 config.yml 文件, 做个性化配置  
